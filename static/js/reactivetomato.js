@@ -41,10 +41,8 @@ var ReactiveTomato = React.createClass({
       dataType: "json",
       type: "POST",
       data: JSON.stringify({
-        breaklength: 5000,
-        worklength: 5000,
-        //breaklength: 300000,
-        //worklength: 1500000,
+        breaklength: 300000,
+        worklength: 1500000,
         tags: this.state.tags
       }),
       success: function(data) {
