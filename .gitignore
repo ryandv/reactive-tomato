@@ -3,5 +3,4 @@ cabal.sandbox.config
 dist
 elm-stuff
 state
-*.js
 *.swp
