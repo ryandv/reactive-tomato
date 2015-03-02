@@ -38,6 +38,10 @@ Test-Suite spec
     hs-source-dirs: src, src/spec
     main-is:    Spec.hs
     build-depends: base,
+                   acid-state >= 0.12.3,
+                   containers >= 0.5.5.1,
                    hspec >= 2.1.4,
+                   mtl >= 2.2.1,
+                   safecopy >= 0.8.3,
                    time >= 1.4.2
 
