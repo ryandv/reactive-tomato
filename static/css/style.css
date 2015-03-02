@@ -1,0 +1,84 @@
+html {
+    background-color: #efefef;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    border: 0;
+    margin: 8px;
+    padding: 12px 18px 12px 18px;
+    border-radius: 4px;
+    color: white;
+    font-size: xx-large;
+}
+
+.button-green {
+    background: rgb(20, 86, 204);
+}
+
+.button-red {
+    background: rgb(255, 73, 0);
+}
+
+#elmodoro-app {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #efefef;
+}
+
+#elmodoro-timer {
+    width: 100%;
+    padding: 64px 0px 64px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 64pt;
+    font-family: 'Russo One', sans-serif;
+    background-color: #3D5E99;
+    color: #ffffff;
+}
+
+#elmodoro-tags {
+    width: 100%;
+    margin: 0 auto 8px auto;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.tag-field {
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    color: #aaaaaa;
+    border: 0;
+    padding: 6px;
+    outline: 0;
+}
+
+#options {
+    width: 98%;
+    margin: 8px auto auto auto;
+    background-color: #efefef;
+}
+
+#elmodoro-controls {
+    width: 100%;
+    padding: 32px 0px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.aborted-timer {
+    color: #6FCC14;
+}
+
+.break-timer, .completed-timer {
+    color: #ffffff;
+}
+
+.break-pending-timer, .in-progress-timer {
+    color: #ffffff;
+}
