@@ -7,6 +7,12 @@ var STATUSES = {
   ABORTED: "aborted"
 };
 
+/********************************************************************************
+*
+* ReactiveTomato view
+*
+/*******************************************************************************/
+
 var ReactiveTomato = React.createClass({
 
   getInitialState: function() {
@@ -68,8 +74,37 @@ var ReactiveTomato = React.createClass({
     });
   },
 
-  handleTimerEnd: function() {
+  handleTimerEnd: function(status) {
+    this.displayEndNotification(status);
     this.requestServerUpdate();
+  },
+
+  chooseNotificationMessage: function(status) {
+    switch(status) {
+      case STATUSES.INPROGRESS:
+        return "Finished working!";
+      case STATUSES.BREAK:
+        return "Break completed!";
+    }
+  },
+
+  createNotification: function(message) {
+    return new Notification(message);
+  },
+
+  displayEndNotification: function(status) {
+    if (!("Notification" in window)) {
+      console.log("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+      this.createNotification(this.chooseNotificationMessage(status));
+    } else if (Notification.permission !== "granted") {
+      Notification.requestPermission(function (permission) {
+        if (permission === "granted") {
+          this.createNotification(this.chooseNotificationMessage(status));
+        }
+      });
+    }
+
   },
 
   handleStart: function() {
@@ -125,6 +160,12 @@ var ReactiveTomato = React.createClass({
 
 });
 
+/********************************************************************************
+*
+* Controls view
+*
+/*******************************************************************************/
+
 var Controls = React.createClass({
 
   getInitialState: function() {
@@ -152,6 +193,12 @@ var Controls = React.createClass({
 
 });
 
+/********************************************************************************
+*
+* TagEntry view
+*
+/*******************************************************************************/
+
 var TagEntry = React.createClass({
 
   handleChange: function(e) {
@@ -167,6 +214,12 @@ var TagEntry = React.createClass({
   }
 
 });
+
+/********************************************************************************
+*
+* Timer view
+*
+/*******************************************************************************/
 
 var Timer = React.createClass({
 
@@ -211,7 +264,7 @@ var Timer = React.createClass({
 
     if (this.state.timeRemaining - 1000 <= 0) {
       clearInterval(this.interval);
-      this.props.onTimerEnd();
+      this.props.onTimerEnd(this.state.status);
     } else {
       this.setState({
         timeRemaining: this.state.timeRemaining - 1000
