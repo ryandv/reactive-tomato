@@ -112,6 +112,12 @@ updateHandler db id = do
     (Just elmodoro) -> ok $ toResponseBS (C.pack "application/json") (encode $ IdentifiedElmodoro id elmodoro)
     Nothing         -> notFound $ toResponse ("Elmodoro not found" :: String)
 
+tagIndexHandler :: AcidState ElmodoroDB -> ServerPart Response
+tagIndexHandler db = do
+  method GET
+  tags <- query' db GetAllTags
+  ok $ toResponseBS (C.pack "application/json") (encode tags)
+
 main :: IO ()
 main = do
   db <- openLocalState (ElmodoroDB Data.IntMap.Lazy.empty)
@@ -124,6 +130,7 @@ main = do
                 createHandler db
            , path $ updateHandler db
            ]
+         , dir "tags" $ tagIndexHandler db
          , dir "js" $ serveDirectory DisableBrowsing ["index.html"] "static/js"
          , dir "css" $ serveDirectory DisableBrowsing ["index.html"] "static/css"
          , dir "elm" $ serveDirectory DisableBrowsing ["index.html"] "elm-stuff/packages/elm-lang/core/1.1.0/src/Native"
