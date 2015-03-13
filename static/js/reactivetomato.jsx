@@ -45,7 +45,7 @@ define(['react'], function(React) {
 
     requestNewModel: function() {
       $.ajax({
-        url: "http://localhost:8080/elmodoro/",
+        url: "/elmodoro",
         dataType: "json",
         type: "POST",
         data: JSON.stringify({
@@ -64,7 +64,7 @@ define(['react'], function(React) {
 
     requestServerUpdate: function() {
       $.ajax({
-        url: "http://localhost:8080/elmodoro/" + this.state.id,
+        url: "/elmodoro/" + this.state.id,
         dataType: "json",
         type: "PUT",
         success: function(data) {
